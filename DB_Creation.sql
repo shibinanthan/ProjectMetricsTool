@@ -1,0 +1,189 @@
+--CREATE DATABASE TaskTool
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Project')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Project](
+	[PrjID] [uniqueidentifier] NOT NULL,
+	[ProjectID] [uniqueidentifier] NOT NULL,
+	[Description] [Varchar](200),
+	[ReleaseId] [uniqueidentifier] NOT NULL,
+	[TeamId] [uniqueidentifier] NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[PrjID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
+
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Release')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Release](
+	[ReleaseID] [uniqueidentifier] NOT NULL,	
+	[Description] [Varchar](200)	
+PRIMARY KEY CLUSTERED 
+(
+	[ReleaseID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
+
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Requirement')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Requirement](
+	[ReqID] [uniqueidentifier] NOT NULL,	
+	[PrjID] [uniqueidentifier] NOT NULL,
+	[Description] [Varchar](200) NOT NULL	
+PRIMARY KEY CLUSTERED 
+(
+	[ReqID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO	
+
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Phase')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Phase](
+	[PhaseID] [uniqueidentifier] NOT NULL,		
+	[Description] [Varchar](200) NOT NULL	
+PRIMARY KEY CLUSTERED 
+(
+	[PhaseID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO	
+
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Activity')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Activity](
+	[ActivityID] [uniqueidentifier] NOT NULL,	
+	[PhaseID] [uniqueidentifier] NOT NULL,		
+	[Description] [Varchar](200) NOT NULL	
+PRIMARY KEY CLUSTERED 
+(
+	[ActivityID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
+	
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Process')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Process](
+	[ProcessID] [uniqueidentifier] NOT NULL,	
+	[ActivityID] [uniqueidentifier] NOT NULL,		
+	[Description] [Varchar](50) NOT NULL	
+PRIMARY KEY CLUSTERED 
+(
+	[ProcessID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO		
+ 	
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Team')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Team](
+	[TeamID] [uniqueidentifier] NOT NULL,		
+	[Name] [Varchar](50) NOT NULL	
+PRIMARY KEY CLUSTERED 
+(
+	[TeamID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
+
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Employee')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Employee](
+	[EmpID] [int] IDENTITY(1,1) NOT NULL,		
+	[Name] [Varchar](50) NOT NULL,
+	[TeamID] [uniqueidentifier] NOT NULL,	
+PRIMARY KEY CLUSTERED 
+(
+	[EmpID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO	
+
+IF NOT EXISTS(SELECT 1 FROM SYS.TABLES WHERE name='Task')
+BEGIN
+
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Task](
+	[TaskID] [uniqueidentifier] NOT NULL,		
+	[Description] [Varchar](100) NOT NULL,
+	[PrjID] [uniqueidentifier] NOT NULL,
+	[ReqID] [uniqueidentifier] NOT NULL,
+	[ProcessID] [uniqueidentifier] NOT NULL,
+	[EmpID] [int] NOT NULL,
+    [PlannedStartDate] [DateTime] NULL,
+    [PlannedEndDate][DateTime] NULL,
+	[ActualStartDate][DateTime] NULL,
+	[ActualEndDate][DateTime] NULL,
+	[CreatedDate][DateTime] NOT NULL,
+	[UpdatedDate][DateTime] NOT NULL,
+	[TotalDuration] [Decimal] NOT NULL,
+	[TotalEffort] [Decimal] NOT NULL, 
+	[TaskType] [Varchar](50),
+    [Priority] [int] NOT NULL,
+    [TaskStatus] [int] NOT NULL,
+	[Allocation] [Varchar](50),
+	[Comments] [Varchar] (100),
+	[AnyChangeInReq] [bit],
+	[Risk] [Varchar](50),
+	[IsActive] [bit] NOT NULL DEFAULT 1,
+PRIMARY KEY CLUSTERED 
+(
+	[TaskID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END
+GO
