@@ -1,10 +1,10 @@
-﻿using Cognizant.Tools.ProjectMetrics.DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {
@@ -24,7 +24,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
 
             if (team == null)
             {
-                //teamRepository.Insert(new Team(teamName));
+                teamRepository.Insert(new Team(){ Name= teamName});
                 teamRepository.Commit();
             }
 
@@ -33,7 +33,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
             if (team == null)
             {
                 team = teamRepository.GetByName(teamName);
-                empRepository.Insert(new Employee(empId, empName, team.ID));
+                empRepository.Insert(new Employee() { EmpID = empId, Name = empName, TeamID = System.Guid.NewGuid()});
                 teamRepository.Commit();
             }
         }

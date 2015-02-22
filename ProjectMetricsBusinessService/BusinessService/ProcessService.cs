@@ -1,10 +1,10 @@
-﻿using Cognizant.Tools.ProjectMetrics.DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {
@@ -27,25 +27,25 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
 
             if (phase == null)
             {
-                phaseRepository.Insert(new Phase(phaseName));
+                phaseRepository.Insert(new Phase() { Description = phaseName });
                 phaseRepository.Commit();
                 phase = phaseRepository.GetByName(phaseName);
             }
 
-            var activity = activityRepository.GetByDetails(phaseName, phase.ID);
+            var activity = activityRepository.GetByDetails(phaseName, phase.PhaseID);
 
             if (activity == null)
             {
-                activityRepository.Insert(new Activity(activityName, phase.ID));
+                activityRepository.Insert(new Activity() { Description = activityName, PhaseID = phase.PhaseID });
                 activityRepository.Commit();
-                activity = activityRepository.GetByDetails(activityName, phase.ID);
+                activity = activityRepository.GetByDetails(activityName, phase.PhaseID);
             }
 
-            var process = processRepository.GetByDetails(processName, phase.ID, activity.ID);
+            var process = processRepository.GetByDetails(processName, phase.PhaseID, activity.ActivityID);
 
             if (process == null)
             {
-                processRepository.Insert(new Process(processName, phase.ID, activity.ID));
+                processRepository.Insert(new Process() { Description = processName, ActivityID = activity.ActivityID });
                 processRepository.Commit();
             }
         }

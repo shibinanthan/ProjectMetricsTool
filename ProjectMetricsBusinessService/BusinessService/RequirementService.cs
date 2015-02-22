@@ -1,10 +1,10 @@
-﻿using Cognizant.Tools.ProjectMetrics.DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {
@@ -34,12 +34,12 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
 
             var project = prjService.GetProject(projectId, prjDesc, releaseDesc, teamName);
 
-            var requirement = reqRepository.GetByDetails(project.ID, requirementDescription);
+            var requirement = reqRepository.GetByDetails(project.ProjectID, requirementDescription);
 
             if (requirement == null)
             {
                 project = prjService.GetProject(projectId, prjDesc, releaseDesc, teamName);
-                this.reqRepository.Insert(new Requirement(project.ID, requirementDescription));
+                this.reqRepository.Insert(new Requirement() { PrjID = project.ProjectID, Description = requirementDescription});
                 this.reqRepository.Commit();
             }
         }

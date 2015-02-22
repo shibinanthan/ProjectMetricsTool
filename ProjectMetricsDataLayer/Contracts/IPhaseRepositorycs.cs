@@ -7,14 +7,11 @@ using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.DataAccessContracts
 {
-    public interface IEmployeeRepository
+    public interface IPhaseRepository
     {
-        Employee GetById(int empId);
-
-        List<Employee> GetAll();
-
-        void Insert(Employee employee);
-
+        List<Phase> GetAll();
+        void Insert(Phase phase);
+        Phase GetByName(string phaseName);
         void Commit();
     }
 }

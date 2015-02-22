@@ -39,7 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessService\EmployeeService.cs" />
     <Compile Include="BusinessService\LoginService.cs" />
+    <Compile Include="BusinessService\ProcessDetails.cs" />
+    <Compile Include="BusinessService\ProcessService.cs" />
+    <Compile Include="BusinessService\ProjectService.cs" />
+    <Compile Include="BusinessService\ReleaseService.cs" />
+    <Compile Include="BusinessService\RequirementService.cs" />
+    <Compile Include="BusinessService\TaskService.cs" />
+    <Compile Include="BusinessService\TeamService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ProductivityReport.cs" />
     <Compile Include="Report\EmployeeReport.cs" />

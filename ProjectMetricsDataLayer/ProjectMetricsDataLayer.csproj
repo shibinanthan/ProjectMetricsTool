@@ -53,6 +53,15 @@
     <Compile Include="Cache\HTTPCacheService.cs" />
     <Compile Include="Cache\ICacheService.cs" />
     <Compile Include="Cache\NullCacheService.cs" />
+    <Compile Include="Contracts\IActivityRepository.cs" />
+    <Compile Include="Contracts\IEmployeeRepository.cs" />
+    <Compile Include="Contracts\IPhaseRepositorycs.cs" />
+    <Compile Include="Contracts\IProcessRepository.cs" />
+    <Compile Include="Contracts\IProjectRepository.cs" />
+    <Compile Include="Contracts\IReleaseRepository.cs" />
+    <Compile Include="Contracts\IRequirementRepository.cs" />
+    <Compile Include="Contracts\ITaskRepository.cs" />
+    <Compile Include="Contracts\ITeamRepository.cs" />
     <Compile Include="DataContext\PMDataContext.cs" />
     <Compile Include="Contracts\ILoginRepository.cs" />
     <Compile Include="PM_EDMX\Activity.cs">

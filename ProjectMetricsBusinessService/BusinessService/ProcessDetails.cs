@@ -1,11 +1,10 @@
-﻿using Cognizant.Tools.ProjectMetrics.DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cognizant.Tools.ProjectMetrics;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {

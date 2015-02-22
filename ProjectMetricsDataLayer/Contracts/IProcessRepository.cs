@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
+
 namespace Cognizant.Tools.ProjectMetrics.DataAccessContracts
 {
-    public interface IEmployeeRepository
+    public interface IProcessRepository
     {
-        Employee GetById(int empId);
-
-        List<Employee> GetAll();
-
-        void Insert(Employee employee);
-
+        List<Process> GetAll();
+        void Insert(Process Process);
+        Phase GetByDetails(string processName, Guid phaseId, Guid activityId);
         void Commit();
     }
 }

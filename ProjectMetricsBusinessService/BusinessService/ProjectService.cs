@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cognizant.Tools.ProjectMetrics.DomainLayer;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {
@@ -28,7 +28,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
 
             if (release == null)
             {
-                releaseRepository.Insert(new Release(releaseDesc));
+                releaseRepository.Insert(new Release() { Description = releaseDesc });
                 releaseRepository.Commit();
             }
 
@@ -36,7 +36,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
 
             if (team == null)
             {
-                //this.teamRepository.Insert(new Team(teamName));
+                this.teamRepository.Insert(new Team() { Name = teamName });
                 this.teamRepository.Commit();
             }
 
@@ -46,7 +46,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
             {
                 release = releaseRepository.GetByDescription(releaseDesc);
                 team = teamRepository.GetByName(teamName);
-                this.projRepository.Insert(new Project(projectId, prjDesc, release.ID, team.ID));
+                this.projRepository.Insert(new Project() { ProjectID = System.Guid.NewGuid(), Description = prjDesc, ReleaseId = release.ReleaseID, TeamId = team.TeamID });
                 this.projRepository.Commit();
             }
         }

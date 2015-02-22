@@ -1,11 +1,10 @@
-﻿using Cognizant.Tools.ProjectMetrics.BusinessService;
-using Cognizant.Tools.ProjectMetrics.DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {
@@ -18,22 +17,22 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
             this.taskRepository = TaskRepository;
         }
 
-        public List<TaskDetail> GetAll()
+        public List<ProjectTask> GetAll()
         {
             return this.taskRepository.GetAll();
         }
         
         public void AddTask(string taskDescription, Guid prjId, Guid reqId, Guid processId, int empID,
                      DateTime plannedStartDate, DateTime plannedEndDate, DateTime actualStartDate, DateTime actualEndDate, int durationInDays, int effortsInHours,
-                     TaskType taskType, StatusofTask tskStatus, string comments, Confirmation anyChangeInReq, string risk)
+                     string taskType, string tskStatus, string comments, string anyChangeInReq, string risk)
         {
             var taskDetals = this.taskRepository.GetByDetails(taskDescription, prjId, reqId);
 
             if (taskDetals == null)
             {
-                //this.taskRepository.Insert(new TaskDetail(taskDescription, prjId, reqId, processId, empID,
-                //         plannedStartDate, plannedEndDate, actualStartDate, actualEndDate, durationInDays, effortsInHours,
-                //         taskType, tskStatus, comments, anyChangeInReq, risk));
+                this.taskRepository.Insert(new ProjectTask() { Description = taskDescription, ProcessID = prjId, ReqID = reqId, Process = null, EmpID = empID,
+                         PlannedStartDate = plannedStartDate, PlannedEndDate = plannedEndDate, ActualStartDate = actualStartDate, ActualEndDate = actualEndDate, TotalDuration = durationInDays, TotalEffort = effortsInHours,
+                         TaskType = taskType, TaskStatus = tskStatus, Comments = comments, AnyChangeInReq = Convert.ToBoolean(anyChangeInReq), Risk = risk});
 
                 this.taskRepository.Commit();
             }

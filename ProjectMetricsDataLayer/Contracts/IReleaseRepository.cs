@@ -7,14 +7,17 @@ using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 
 namespace Cognizant.Tools.ProjectMetrics.DataAccessContracts
 {
-    public interface IEmployeeRepository
+    public interface IReleaseRepository
     {
-        Employee GetById(int empId);
+        Release GetById(Guid id);
 
-        List<Employee> GetAll();
+        List<Release> GetAll();
 
-        void Insert(Employee employee);
+        void Insert(Release release);
+
+        Release GetByDescription(string releaseDesc);
 
         void Commit();
+
     }
 }
