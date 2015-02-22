@@ -40,6 +40,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ProjectMetricsBusinessService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -49,14 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ProjectMetricsDataAccessContracts\bin\Debug\ProjectMetricsDataAccessContracts.dll</HintPath>
     </Reference>
-    <Reference Include="ProjectMetricsDataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ProjectMetricsDataLayer\bin\Debug\ProjectMetricsDataLayer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -73,9 +75,6 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -334,6 +333,10 @@
     <ProjectReference Include="..\ProjectMetricsConnectionManager\ProjectMetricsConnectionManager.csproj">
       <Project>{257e95e8-a9e0-4aaa-801a-eb9f7116d576}</Project>
       <Name>ProjectMetricsConnectionManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectMetricsDataLayer\ProjectMetricsDataLayer.csproj">
+      <Project>{4a901db4-2b48-4ca0-9f06-be7443d03415}</Project>
+      <Name>ProjectMetricsDataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProjectMetricsDomainLayer\ProjectMetricsDomainLayer.csproj">
       <Project>{4e66edc2-d5f9-4ef3-8361-7c7f8d22d4bd}</Project>

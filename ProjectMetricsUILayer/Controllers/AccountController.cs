@@ -38,7 +38,7 @@ namespace ProjectMetricsUILayer.Controllers
         {
             //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             var user = Gateway.ValidateUser(model.UserName, model.Password);
-            if (ModelState.IsValid && user.ID > 0)
+            if (ModelState.IsValid && user != null && user.ID > 0)
             {
                 HttpContext.Session.Add("UserDetail", user);
                 return RedirectToLocal(returnUrl);

@@ -39,16 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessService\EmployeeService.cs" />
     <Compile Include="BusinessService\LoginService.cs" />
-    <Compile Include="BusinessService\ProcessDetails.cs" />
-    <Compile Include="BusinessService\ProcessService.cs" />
-    <Compile Include="BusinessService\ProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BusinessService\ReleaseService.cs" />
-    <Compile Include="BusinessService\RequirementService.cs" />
-    <Compile Include="BusinessService\TaskService.cs" />
-    <Compile Include="BusinessService\TeamService.cs" />
     <Compile Include="Report\ProductivityReport.cs" />
     <Compile Include="Report\EmployeeReport.cs" />
     <Compile Include="Report\ProjectReport.cs" />
@@ -59,6 +51,10 @@
     <ProjectReference Include="..\ProjectMetricsDataAccessContracts\ProjectMetricsDataAccessContracts.csproj">
       <Project>{5af07a74-0362-423b-bd13-8fabac5b5808}</Project>
       <Name>ProjectMetricsDataAccessContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectMetricsDataLayer\ProjectMetricsDataLayer.csproj">
+      <Project>{4a901db4-2b48-4ca0-9f06-be7443d03415}</Project>
+      <Name>ProjectMetricsDataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProjectMetricsDomainLayer\ProjectMetricsDomainLayer.csproj">
       <Project>{4e66edc2-d5f9-4ef3-8361-7c7f8d22d4bd}</Project>

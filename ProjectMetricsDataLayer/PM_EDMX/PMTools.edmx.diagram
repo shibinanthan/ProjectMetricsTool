@@ -12,21 +12,22 @@
         <EntityTypeShape EntityType="PMModel.Project" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PMModel.Release" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="PMModel.Requirement" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PMModel.Task" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PMModel.Team" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PMModel.User" Width="1.5" PointX="10" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PMModel.UserType" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="PMModel.fk_Activity_PhaseId" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.fk_Process_ActivityId" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.fk_Employee_TeamId" ManuallyRouted="false" />
-        <AssociationConnector Association="PMModel.fk_Task_EmpID" ManuallyRouted="false" />
-        <AssociationConnector Association="PMModel.fk_Task_ProcessID" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.fk_Project_ReleaseId" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.fk_Project_TeamId" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.fk_Requirement_PrjId" ManuallyRouted="false" />
-        <AssociationConnector Association="PMModel.fk_Task_PrjID" ManuallyRouted="false" />
-        <AssociationConnector Association="PMModel.fk_Task_ReqID" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.FK_User_TypeId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PMModel.ProjectTask" Width="1.5" PointX="7.5" PointY="4.75" />
+        <AssociationConnector Association="PMModel.fk_Task_EmpID1" />
+        <AssociationConnector Association="PMModel.fk_Task_ProcessID1" />
+        <AssociationConnector Association="PMModel.fk_ProjectTask_PrjID" />
+        <AssociationConnector Association="PMModel.fk_Task_PrjID1" />
+        <AssociationConnector Association="PMModel.fk_Task_ReqID1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

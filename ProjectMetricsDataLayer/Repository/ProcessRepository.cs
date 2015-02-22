@@ -13,8 +13,8 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
     public class ProcessRepository : BaseRepository<Process>, IProcessRepository
     {
 
-        PMDataContext pmDataContext = null;
-        public ProcessRepository(PMDataContext pmDataContext)
+        PM_EDMX.PMEntities pmDataContext = null;
+        public ProcessRepository(PM_EDMX.PMEntities pmDataContext)
             : base(pmDataContext)
         {
             if (pmDataContext == null)

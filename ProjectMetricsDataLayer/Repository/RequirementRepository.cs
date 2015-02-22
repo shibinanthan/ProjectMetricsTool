@@ -13,8 +13,8 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
     public class RequirementRepository : BaseRepository<Requirement>, IRequirementRepository
     {
 
-        PMDataContext pmDataContext = null;
-        public RequirementRepository(PMDataContext pmDataContext)
+        PM_EDMX.PMEntities pmDataContext = null;
+        public RequirementRepository(PM_EDMX.PMEntities pmDataContext)
             : base(pmDataContext)
         {
             if (pmDataContext == null)

@@ -39,16 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IActivityRepository.cs" />
-    <Compile Include="Contracts\IEmployeeRepository.cs" />
-    <Compile Include="Contracts\ILoginRepository.cs" />
-    <Compile Include="Contracts\IPhaseRepositorycs.cs" />
-    <Compile Include="Contracts\IProcessRepository.cs" />
-    <Compile Include="Contracts\IProjectRepository.cs" />
-    <Compile Include="Contracts\IReleaseRepository.cs" />
-    <Compile Include="Contracts\IRequirementRepository.cs" />
-    <Compile Include="Contracts\ITaskRepository.cs" />
-    <Compile Include="Contracts\ITeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +46,12 @@
       <Project>{4e66edc2-d5f9-4ef3-8361-7c7f8d22d4bd}</Project>
       <Name>ProjectMetricsDomainLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

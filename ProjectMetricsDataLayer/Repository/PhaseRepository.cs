@@ -12,8 +12,8 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
 {
     public class PhaseRepository : BaseRepository<Phase>, IPhaseRepository
     {
-        PMDataContext pmDataContext = null;
-        public PhaseRepository(PMDataContext pmDataContext)
+        PM_EDMX.PMEntities pmDataContext = null;
+        public PhaseRepository(PM_EDMX.PMEntities pmDataContext)
             : base(pmDataContext)
         {
             if (pmDataContext == null)

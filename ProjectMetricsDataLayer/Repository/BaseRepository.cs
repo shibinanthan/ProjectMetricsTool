@@ -9,31 +9,36 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
 {
     public abstract class BaseRepository<TEntity> where TEntity : class
     {
-        private PMDataContext _pmDataContext;
+        private PM_EDMX.PMEntities _pmDataContext;
 
-        protected BaseRepository(PMDataContext dataContext)
+        //protected BaseRepository(PMDataContext dataContext)
+        //{
+        //    _pmDataContext = dataContext;
+        //}
+
+        protected BaseRepository(PM_EDMX.PMEntities dataContext)
         {
             _pmDataContext = dataContext;
         }
 
-        protected Table<TEntity> GetTable
-        {
-            get { return _pmDataContext.GetTable<TEntity>(); }
-        }
+        //protected Table<TEntity> GetTable
+        //{
+        //    get { return _pmDataContext.GetTable<TEntity>(); }
+        //}
 
-        protected void InsertOnCommit(TEntity entity)
-        {
-            _pmDataContext.GetTable<TEntity>().InsertOnSubmit(entity);
-        }
+        //protected void InsertOnCommit(TEntity entity)
+        //{
+        //    _pmDataContext.GetTable<TEntity>().InsertOnSubmit(entity);
+        //}
 
-        protected void DeleteOnCommit(TEntity entity)
-        {
-            _pmDataContext.GetTable<TEntity>().DeleteOnSubmit(entity);
-        }
+        //protected void DeleteOnCommit(TEntity entity)
+        //{
+        //    _pmDataContext.GetTable<TEntity>().DeleteOnSubmit(entity);
+        //}
 
-        protected void SaveChanges()
-        {
-            _pmDataContext.SubmitChanges();
-        }
+        //protected void SaveChanges()
+        //{
+        //    _pmDataContext.SubmitChanges();
+        //}
     }
 }

@@ -12,8 +12,8 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
 {
     public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
-        PMDataContext pmDataContext = null;
-        public EmployeeRepository(PMDataContext pmDataContext)
+        PM_EDMX.PMEntities pmDataContext = null;
+        public EmployeeRepository(PM_EDMX.PMEntities pmDataContext)
             : base(pmDataContext)
         {
             if (pmDataContext == null)

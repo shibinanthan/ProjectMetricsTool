@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Helpers;
 using Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Models;
-using Cognizant.Tools.ProjectMetrics.DomainLayer;
+using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
 using Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Filters;
 
 namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Controllers
@@ -36,25 +36,25 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Controllers
         public ActionResult Create()
         {
             var taskModel = new TaskModel();
-            taskModel.Teams = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
-                                                            new SelectListItem()
-                                                            {
-                                                                Text = x.Name,
-                                                                Value = x.ID.ToString()
-                                                            });
-            taskModel.TeamMemebrs = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
-                                                            new SelectListItem()
-                                                            {
-                                                                Text = x.Name,
-                                                                Value = x.ID.ToString()
-                                                            });
-            taskModel.TaskType = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
-                                                            new SelectListItem()
-                                                            {
-                                                                Text = x.Name,
-                                                                Value = x.ID.ToString()
-                                                            });
-            taskModel.CreationDate = DateTime.Now;
+            //taskModel.Teams = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
+            //                                                new SelectListItem()
+            //                                                {
+            //                                                    Text = x.Name,
+            //                                                    Value = x.ID.ToString()
+            //                                                });
+            //taskModel.TeamMemebrs = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
+            //                                                new SelectListItem()
+            //                                                {
+            //                                                    Text = x.Name,
+            //                                                    Value = x.ID.ToString()
+            //                                                });
+            //taskModel.TaskType = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
+            //                                                new SelectListItem()
+            //                                                {
+            //                                                    Text = x.Name,
+            //                                                    Value = x.ID.ToString()
+            //                                                });
+            //taskModel.CreationDate = DateTime.Now;
             return View(taskModel);
         }
 

@@ -12,8 +12,8 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
 {
     public class TaskRepository : BaseRepository<TaskDetail>, ITaskRepository
     {
-        PMDataContext pmDataContext = null;
-        public TaskRepository(PMDataContext pmDataContext)
+        PM_EDMX.PMEntities pmDataContext = null;
+        public TaskRepository(PM_EDMX.PMEntities pmDataContext)
             : base(pmDataContext)
         {
             if (pmDataContext == null)
@@ -21,21 +21,21 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
 
             this.pmDataContext = pmDataContext;
         }
-        public List<TaskDetail> GetAll()
+        public List<PM_EDMX.ProjectTask> GetAll()
         {
-            var task = (from t in base.GetTable select t).ToList();
+            var task = (from t in pmDataContext.ProjectTasks select t).ToList();
 
             return task;
         }
 
-        public void Insert(TaskDetail task)
+        public void Insert(PM_EDMX.ProjectTask task)
         {
-            base.InsertOnCommit(task);
+            pmDataContext.ProjectTasks.Add(task);
         }
 
         public void Commit()
         {
-            base.SaveChanges();
+            pmDataContext.SaveChanges();
         }
 
         public TaskDetail GetByDetails(string taskDescription, Guid prjId, Guid reqId)

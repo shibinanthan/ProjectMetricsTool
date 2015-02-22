@@ -28,7 +28,7 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer
 
         public void SetConnectionString()
         {
-            Cognizant.Tools.ProjectMetrics.ConnectionManager.ConnectionManager.PMToolsEntityConnectionString = ConfigurationManager.AppSettings["PMToolsDBString"].ToString();
+            Cognizant.Tools.ProjectMetrics.ConnectionManager.ConnectionManager.PMToolsEntityConnectionString = ConfigurationManager.ConnectionStrings["PMEntities"].ToString();
         }
     }
 }

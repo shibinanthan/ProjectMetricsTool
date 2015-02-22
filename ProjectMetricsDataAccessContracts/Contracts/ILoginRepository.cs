@@ -9,7 +9,7 @@ namespace Cognizant.Tools.ProjectMetrics.DataAccessContracts
 {
     public interface ILoginRepository
     {
-        List<User> GetAll();
+        List<PM_EDMX.User> GetAll();
         User GetByCredential(string userName, string passsword);
     }
 }

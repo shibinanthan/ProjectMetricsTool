@@ -12,8 +12,8 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer
 {
     public class ReleaseRepository : BaseRepository<Release>, IReleaseRepository
     {
-        PMDataContext pmDataContext = null;
-        public ReleaseRepository(PMDataContext pmDataContext)
+        PM_EDMX.PMEntities pmDataContext = null;
+        public ReleaseRepository(PM_EDMX.PMEntities pmDataContext)
             : base(pmDataContext)
         {
             if (pmDataContext == null)
