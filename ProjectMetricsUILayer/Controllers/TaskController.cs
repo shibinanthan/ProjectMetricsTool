@@ -13,6 +13,7 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Controllers
     [CustomAuthorization]
     public class TaskController : Controller
     {
+        private PMEntities db = new PMEntities();
         //
         // GET: /Task/
 
@@ -33,31 +34,40 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Controllers
         //
         // GET: /Task/Create
 
+        //public ActionResult Create()
+        //{
+        //    var taskModel = new TaskModel();
+        //    //taskModel.Teams = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
+        //    //                                                new SelectListItem()
+        //    //                                                {
+        //    //                                                    Text = x.Name,
+        //    //                                                    Value = x.ID.ToString()
+        //    //                                                });
+        //    //taskModel.TeamMemebrs = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
+        //    //                                                new SelectListItem()
+        //    //                                                {
+        //    //                                                    Text = x.Name,
+        //    //                                                    Value = x.ID.ToString()
+        //    //                                                });
+        //    //taskModel.TaskType = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
+        //    //                                                new SelectListItem()
+        //    //                                                {
+        //    //                                                    Text = x.Name,
+        //    //                                                    Value = x.ID.ToString()
+        //    //                                                });
+        //    //taskModel.CreationDate = DateTime.Now;
+        //    return View(taskModel);
+        //}
+
         public ActionResult Create()
         {
-            var taskModel = new TaskModel();
-            //taskModel.Teams = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
-            //                                                new SelectListItem()
-            //                                                {
-            //                                                    Text = x.Name,
-            //                                                    Value = x.ID.ToString()
-            //                                                });
-            //taskModel.TeamMemebrs = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
-            //                                                new SelectListItem()
-            //                                                {
-            //                                                    Text = x.Name,
-            //                                                    Value = x.ID.ToString()
-            //                                                });
-            //taskModel.TaskType = Gateway.GetAllTeams().AsQueryable<Team>().Select(x =>
-            //                                                new SelectListItem()
-            //                                                {
-            //                                                    Text = x.Name,
-            //                                                    Value = x.ID.ToString()
-            //                                                });
-            //taskModel.CreationDate = DateTime.Now;
-            return View(taskModel);
+            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name");
+            ViewBag.ProcessID = new SelectList(db.Processes, "ProcessID", "Description");
+            ViewBag.PrjID = new SelectList(db.Projects, "PrjID", "Description");
+            ViewBag.PrjID = new SelectList(db.Projects, "PrjID", "Description");
+            ViewBag.ReqID = new SelectList(db.Requirements, "ReqID", "Description");
+            return View();
         }
-
         //
         // POST: /Task/Create
 

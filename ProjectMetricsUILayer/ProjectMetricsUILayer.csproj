@@ -322,6 +322,7 @@
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Create - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
