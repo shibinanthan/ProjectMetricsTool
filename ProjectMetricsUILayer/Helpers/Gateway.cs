@@ -10,14 +10,14 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Helpers
 {
     public static class Gateway
     {
-        public static List<ProjectTask> GetAllTasks()
+        public static List<Tasks> GetAllTasks()
         {
             //using (var context = new PMDataContext())
             //{
             //    var taskService = new TaskService(new TaskRepository(context));
             //    return taskService.GetAll();
             //}
-            return new List<ProjectTask>();
+            return new List<Tasks>();
         }
 
         public static List<Team> GetAllTeams()
@@ -35,7 +35,7 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Helpers
         {
             using (var context = new PMEntities())
             {
-                var loginService = new LoginService(new Cognizant.Tools.ProjectMetrics.DataLayer.LoginRepository(context));
+                var loginService = new LoginService();
                 return loginService.GetByCredential(userName, password);
             }
         }

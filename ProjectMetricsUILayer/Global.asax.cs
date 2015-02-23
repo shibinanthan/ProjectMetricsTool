@@ -28,7 +28,11 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer
 
         public void SetConnectionString()
         {
-            Cognizant.Tools.ProjectMetrics.ConnectionManager.ConnectionManager.PMToolsEntityConnectionString = ConfigurationManager.ConnectionStrings["PMEntities"].ToString();
+            //  For Credentital Security
+            Cognizant.Tools.ProjectMetrics.ConnectionManager.ConnectionManager.PMToolsEntityConnectionString = ConfigurationManager.ConnectionStrings["PMToolsDBString"].ToString();
+            
+            //  For intergrated security
+            //Cognizant.Tools.ProjectMetrics.ConnectionManager.ConnectionManager.PMToolsEntityConnectionString = ConfigurationManager.ConnectionStrings["PMEntities"].ToString();
         }
     }
 }

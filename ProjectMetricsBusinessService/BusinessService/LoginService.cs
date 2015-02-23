@@ -5,25 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using Cognizant.Tools.ProjectMetrics.DataAccessContracts;
 using Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX;
+using Cognizant.Tools.ProjectMetrics.DataLayer;
 
 namespace Cognizant.Tools.ProjectMetrics.BusinessService
 {
     public class LoginService
     {
-        ILoginRepository loginRepository = null;
-        public LoginService(ILoginRepository loginRepository)
+        private LoginRepository objLoginRepository = null;
+
+        public LoginService()
         {
-            this.loginRepository = loginRepository;
+            if (objLoginRepository == null)
+                objLoginRepository = new LoginRepository();
         }
 
         public List<User> GetAll()
         {
-            return this.loginRepository.GetAll();
+            return objLoginRepository.GetAll();
+            
         }
 
         public User GetByCredential(string userName, string password)
         {
-            return this.loginRepository.GetByCredential(userName, password);
+            return objLoginRepository.GetByCredential(userName, password);
         }
     }
 }

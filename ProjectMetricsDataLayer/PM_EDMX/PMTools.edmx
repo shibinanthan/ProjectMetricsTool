@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="ActivityID" />
@@ -46,7 +46,22 @@
           <Property Name="ReleaseId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TeamId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <EntityType Name="ProjectTask">
+        <EntityType Name="Release">
+          <Key>
+            <PropertyRef Name="ReleaseID" />
+          </Key>
+          <Property Name="ReleaseID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Requirement">
+          <Key>
+            <PropertyRef Name="ReqID" />
+          </Key>
+          <Property Name="ReqID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PrjID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
           <Key>
             <PropertyRef Name="TaskID" />
           </Key>
@@ -72,21 +87,6 @@
           <Property Name="AnyChangeInReq" Type="bit" />
           <Property Name="Risk" Type="varchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Release">
-          <Key>
-            <PropertyRef Name="ReleaseID" />
-          </Key>
-          <Property Name="ReleaseID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Requirement">
-          <Key>
-            <PropertyRef Name="ReqID" />
-          </Key>
-          <Property Name="ReqID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="PrjID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -171,18 +171,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_ProjectTask_PrjID">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="PrjID" />
-            </Principal>
-            <Dependent Role="ProjectTask">
-              <PropertyRef Name="PrjID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Requirement_PrjId">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="Requirement" Type="Self.Requirement" Multiplicity="*" />
@@ -197,48 +185,48 @@
         </Association>
         <Association Name="fk_Task_EmpID">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="EmpID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="EmpID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Task_PrjID">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
               <PropertyRef Name="PrjID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="PrjID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Task_ProcessID">
           <End Role="Process" Type="Self.Process" Multiplicity="1" />
-          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Process">
               <PropertyRef Name="ProcessID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="ProcessID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Task_ReqID">
           <End Role="Requirement" Type="Self.Requirement" Multiplicity="1" />
-          <End Role="ProjectTask" Type="Self.ProjectTask" Multiplicity="*" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requirement">
               <PropertyRef Name="ReqID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="ReqID" />
             </Dependent>
           </ReferentialConstraint>
@@ -261,9 +249,9 @@
           <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Process" EntityType="Self.Process" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProjectTask" EntityType="Self.ProjectTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Release" EntityType="Self.Release" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requirement" EntityType="Self.Requirement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
@@ -287,29 +275,25 @@
             <End Role="Team" EntitySet="Team" />
             <End Role="Project" EntitySet="Project" />
           </AssociationSet>
-          <AssociationSet Name="fk_ProjectTask_PrjID" Association="Self.fk_ProjectTask_PrjID">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="ProjectTask" EntitySet="ProjectTask" />
-          </AssociationSet>
           <AssociationSet Name="fk_Requirement_PrjId" Association="Self.fk_Requirement_PrjId">
             <End Role="Project" EntitySet="Project" />
             <End Role="Requirement" EntitySet="Requirement" />
           </AssociationSet>
           <AssociationSet Name="fk_Task_EmpID" Association="Self.fk_Task_EmpID">
             <End Role="Employee" EntitySet="Employee" />
-            <End Role="ProjectTask" EntitySet="ProjectTask" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="fk_Task_PrjID" Association="Self.fk_Task_PrjID">
             <End Role="Project" EntitySet="Project" />
-            <End Role="ProjectTask" EntitySet="ProjectTask" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="fk_Task_ProcessID" Association="Self.fk_Task_ProcessID">
             <End Role="Process" EntitySet="Process" />
-            <End Role="ProjectTask" EntitySet="ProjectTask" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="fk_Task_ReqID" Association="Self.fk_Task_ReqID">
             <End Role="Requirement" EntitySet="Requirement" />
-            <End Role="ProjectTask" EntitySet="ProjectTask" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK_User_TypeId" Association="Self.FK_User_TypeId">
             <End Role="UserType" EntitySet="UserType" />
@@ -338,7 +322,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TeamID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Team" Relationship="Self.fk_Employee_TeamId" FromRole="Employee" ToRole="Team" />
-          <NavigationProperty Name="ProjectTasks" Relationship="PMModel.fk_Task_EmpID1" FromRole="Employee" ToRole="ProjectTask" />
+          <NavigationProperty Name="Tasks" Relationship="PMModel.fk_Task_EmpID" FromRole="Employee" ToRole="Task" />
         </EntityType>
         <EntityType Name="Phase">
           <Key>
@@ -356,7 +340,7 @@
           <Property Name="ActivityID" Type="Guid" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Self.fk_Process_ActivityId" FromRole="Process" ToRole="Activity" />
-          <NavigationProperty Name="ProjectTasks" Relationship="PMModel.fk_Task_ProcessID1" FromRole="Process" ToRole="ProjectTask" />
+          <NavigationProperty Name="Tasks" Relationship="PMModel.fk_Task_ProcessID" FromRole="Process" ToRole="Task" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -370,8 +354,7 @@
           <NavigationProperty Name="Release" Relationship="Self.fk_Project_ReleaseId" FromRole="Project" ToRole="Release" />
           <NavigationProperty Name="Team" Relationship="Self.fk_Project_TeamId" FromRole="Project" ToRole="Team" />
           <NavigationProperty Name="Requirements" Relationship="Self.fk_Requirement_PrjId" FromRole="Project" ToRole="Requirement" />
-          <NavigationProperty Name="ProjectTasks" Relationship="PMModel.fk_ProjectTask_PrjID" FromRole="Project" ToRole="ProjectTask" />
-          <NavigationProperty Name="ProjectTasks1" Relationship="PMModel.fk_Task_PrjID1" FromRole="Project" ToRole="ProjectTask" />
+          <NavigationProperty Name="Tasks" Relationship="PMModel.fk_Task_PrjID" FromRole="Project" ToRole="Task" />
         </EntityType>
         <EntityType Name="Release">
           <Key>
@@ -389,7 +372,7 @@
           <Property Name="PrjID" Type="Guid" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="Self.fk_Requirement_PrjId" FromRole="Requirement" ToRole="Project" />
-          <NavigationProperty Name="ProjectTasks" Relationship="PMModel.fk_Task_ReqID1" FromRole="Requirement" ToRole="ProjectTask" />
+          <NavigationProperty Name="Tasks" Relationship="PMModel.fk_Task_ReqID" FromRole="Requirement" ToRole="Task" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -541,29 +524,25 @@
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="ProjectTasks" EntityType="PMModel.ProjectTask" />
-          <AssociationSet Name="fk_Task_EmpID1" Association="PMModel.fk_Task_EmpID1">
+          <EntitySet Name="Tasks1" EntityType="PMModel.Tasks" />
+          <AssociationSet Name="fk_Task_EmpID" Association="PMModel.fk_Task_EmpID">
             <End Role="Employee" EntitySet="Employees" />
-            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+            <End Role="Task" EntitySet="Tasks1" />
           </AssociationSet>
-          <AssociationSet Name="fk_Task_ProcessID1" Association="PMModel.fk_Task_ProcessID1">
+          <AssociationSet Name="fk_Task_ProcessID" Association="PMModel.fk_Task_ProcessID">
             <End Role="Process" EntitySet="Processes" />
-            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+            <End Role="Task" EntitySet="Tasks1" />
           </AssociationSet>
-          <AssociationSet Name="fk_ProjectTask_PrjID" Association="PMModel.fk_ProjectTask_PrjID">
+          <AssociationSet Name="fk_Task_PrjID" Association="PMModel.fk_Task_PrjID">
             <End Role="Project" EntitySet="Projects" />
-            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+            <End Role="Task" EntitySet="Tasks1" />
           </AssociationSet>
-          <AssociationSet Name="fk_Task_PrjID1" Association="PMModel.fk_Task_PrjID1">
-            <End Role="Project" EntitySet="Projects" />
-            <End Role="ProjectTask" EntitySet="ProjectTasks" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Task_ReqID1" Association="PMModel.fk_Task_ReqID1">
+          <AssociationSet Name="fk_Task_ReqID" Association="PMModel.fk_Task_ReqID">
             <End Role="Requirement" EntitySet="Requirements" />
-            <End Role="ProjectTask" EntitySet="ProjectTasks" />
+            <End Role="Task" EntitySet="Tasks1" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="ProjectTask">
+        <EntityType Name="Tasks">
           <Key>
             <PropertyRef Name="TaskID" />
           </Key>
@@ -589,68 +568,55 @@
           <Property Name="AnyChangeInReq" Type="Boolean" />
           <Property Name="Risk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="PMModel.fk_Task_EmpID1" FromRole="ProjectTask" ToRole="Employee" />
-          <NavigationProperty Name="Process" Relationship="PMModel.fk_Task_ProcessID1" FromRole="ProjectTask" ToRole="Process" />
-          <NavigationProperty Name="Project" Relationship="PMModel.fk_ProjectTask_PrjID" FromRole="ProjectTask" ToRole="Project" />
-          <NavigationProperty Name="Project1" Relationship="PMModel.fk_Task_PrjID1" FromRole="ProjectTask" ToRole="Project" />
-          <NavigationProperty Name="Requirement" Relationship="PMModel.fk_Task_ReqID1" FromRole="ProjectTask" ToRole="Requirement" />
+          <NavigationProperty Name="Employee" Relationship="PMModel.fk_Task_EmpID" FromRole="Task" ToRole="Employee" />
+          <NavigationProperty Name="Process" Relationship="PMModel.fk_Task_ProcessID" FromRole="Task" ToRole="Process" />
+          <NavigationProperty Name="Project" Relationship="PMModel.fk_Task_PrjID" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="Requirement" Relationship="PMModel.fk_Task_ReqID" FromRole="Task" ToRole="Requirement" />
         </EntityType>
-        <Association Name="fk_Task_EmpID1">
+        <Association Name="fk_Task_EmpID">
           <End Type="PMModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="PMModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <End Type="PMModel.Tasks" Role="Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="EmpID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="EmpID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Task_ProcessID1">
+        <Association Name="fk_Task_ProcessID">
           <End Type="PMModel.Process" Role="Process" Multiplicity="1" />
-          <End Type="PMModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <End Type="PMModel.Tasks" Role="Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Process">
               <PropertyRef Name="ProcessID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="ProcessID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_ProjectTask_PrjID">
+        <Association Name="fk_Task_PrjID">
           <End Type="PMModel.Project" Role="Project" Multiplicity="1" />
-          <End Type="PMModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <End Type="PMModel.Tasks" Role="Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
               <PropertyRef Name="PrjID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="PrjID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Task_PrjID1">
-          <End Type="PMModel.Project" Role="Project" Multiplicity="1" />
-          <End Type="PMModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="PrjID" />
-            </Principal>
-            <Dependent Role="ProjectTask">
-              <PropertyRef Name="PrjID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Task_ReqID1">
+        <Association Name="fk_Task_ReqID">
           <End Type="PMModel.Requirement" Role="Requirement" Multiplicity="1" />
-          <End Type="PMModel.ProjectTask" Role="ProjectTask" Multiplicity="*" />
+          <End Type="PMModel.Tasks" Role="Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requirement">
               <PropertyRef Name="ReqID" />
             </Principal>
-            <Dependent Role="ProjectTask">
+            <Dependent Role="Task">
               <PropertyRef Name="ReqID" />
             </Dependent>
           </ReferentialConstraint>
@@ -750,9 +716,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProjectTasks">
-            <EntityTypeMapping TypeName="PMModel.ProjectTask">
-              <MappingFragment StoreEntitySet="ProjectTask">
+          <EntitySetMapping Name="Tasks1">
+            <EntityTypeMapping TypeName="PMModel.Tasks">
+              <MappingFragment StoreEntitySet="Task">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Risk" ColumnName="Risk" />
                 <ScalarProperty Name="AnyChangeInReq" ColumnName="AnyChangeInReq" />

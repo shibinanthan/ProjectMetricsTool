@@ -12,7 +12,7 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class Task
+    public partial class Tasks
     {
         public System.Guid TaskID { get; set; }
         public string Description { get; set; }
@@ -30,7 +30,7 @@ namespace Cognizant.Tools.ProjectMetrics.DataLayer.PM_EDMX
         public decimal TotalEffort { get; set; }
         public string TaskType { get; set; }
         public string Priority { get; set; }
-        public int TaskStatus { get; set; }
+        public string TaskStatus { get; set; }
         public string Allocation { get; set; }
         public string Comments { get; set; }
         public Nullable<bool> AnyChangeInReq { get; set; }

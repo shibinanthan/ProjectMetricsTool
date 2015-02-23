@@ -73,6 +73,7 @@
     <Compile Include="PM_EDMX\Phase.cs">
       <DependentUpon>PMTools.tt</DependentUpon>
     </Compile>
+    <Compile Include="PM_EDMX\PMEntitiesConnectionOverride.cs" />
     <Compile Include="PM_EDMX\PMTools.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,13 +95,13 @@
     <Compile Include="PM_EDMX\Project.cs">
       <DependentUpon>PMTools.tt</DependentUpon>
     </Compile>
-    <Compile Include="PM_EDMX\ProjectTask.cs">
-      <DependentUpon>PMTools.tt</DependentUpon>
-    </Compile>
     <Compile Include="PM_EDMX\Release.cs">
       <DependentUpon>PMTools.tt</DependentUpon>
     </Compile>
     <Compile Include="PM_EDMX\Requirement.cs">
+      <DependentUpon>PMTools.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PM_EDMX\Tasks.cs">
       <DependentUpon>PMTools.tt</DependentUpon>
     </Compile>
     <Compile Include="PM_EDMX\Team.cs">

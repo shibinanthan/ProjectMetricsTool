@@ -9,11 +9,11 @@ namespace Cognizant.Tools.ProjectMetrics.DataAccessContracts
 {
     public interface ITaskRepository
     {
-        List<ProjectTask> GetAll();
-        void Insert(ProjectTask task);
-        ProjectTask GetByDetails(string taskDescription, Guid prjId, Guid reqId);
-        List<ProjectTask> GetEmployeesReportByProject(List<int> empIds, Guid prjId);
-        List<ProjectTask> CalculateEmployeeProductivity(List<int> empIds, Guid prjId);
+        List<Tasks> GetAll();
+        void Insert(Tasks task);
+        Tasks GetByDetails(string taskDescription, Guid prjId, Guid reqId);
+        List<Tasks> GetEmployeesReportByProject(List<int> empIds, Guid prjId);
+        List<Tasks> CalculateEmployeeProductivity(List<int> empIds, Guid prjId);
 
         void Commit();
 

@@ -22,12 +22,11 @@
         <AssociationConnector Association="PMModel.fk_Project_TeamId" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.fk_Requirement_PrjId" ManuallyRouted="false" />
         <AssociationConnector Association="PMModel.FK_User_TypeId" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PMModel.ProjectTask" Width="1.5" PointX="7.5" PointY="4.75" />
-        <AssociationConnector Association="PMModel.fk_Task_EmpID1" />
-        <AssociationConnector Association="PMModel.fk_Task_ProcessID1" />
-        <AssociationConnector Association="PMModel.fk_ProjectTask_PrjID" />
-        <AssociationConnector Association="PMModel.fk_Task_PrjID1" />
-        <AssociationConnector Association="PMModel.fk_Task_ReqID1" />
+        <EntityTypeShape EntityType="PMModel.Tasks" Width="1.5" PointX="10.5" PointY="4.875" />
+        <AssociationConnector Association="PMModel.fk_Task_EmpID" />
+        <AssociationConnector Association="PMModel.fk_Task_ProcessID" />
+        <AssociationConnector Association="PMModel.fk_Task_PrjID" />
+        <AssociationConnector Association="PMModel.fk_Task_ReqID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

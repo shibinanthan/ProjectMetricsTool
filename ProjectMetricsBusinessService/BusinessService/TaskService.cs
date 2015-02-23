@@ -17,7 +17,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
             this.taskRepository = TaskRepository;
         }
 
-        public List<ProjectTask> GetAll()
+        public List<Tasks> GetAll()
         {
             return this.taskRepository.GetAll();
         }
@@ -30,7 +30,7 @@ namespace Cognizant.Tools.ProjectMetrics.BusinessService
 
             if (taskDetals == null)
             {
-                this.taskRepository.Insert(new ProjectTask() { Description = taskDescription, ProcessID = prjId, ReqID = reqId, Process = null, EmpID = empID,
+                this.taskRepository.Insert(new Tasks() { Description = taskDescription, ProcessID = prjId, ReqID = reqId, Process = null, EmpID = empID,
                          PlannedStartDate = plannedStartDate, PlannedEndDate = plannedEndDate, ActualStartDate = actualStartDate, ActualEndDate = actualEndDate, TotalDuration = durationInDays, TotalEffort = effortsInHours,
                          TaskType = taskType, TaskStatus = tskStatus, Comments = comments, AnyChangeInReq = Convert.ToBoolean(anyChangeInReq), Risk = risk});
 

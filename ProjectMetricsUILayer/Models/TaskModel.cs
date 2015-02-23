@@ -21,7 +21,7 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Models
         [Display(Name = "Task Description")]
         public string Name { get; set; }
 
-        public int AssignedToId { get; set; }
+        public string AssignedToId { get; set; }
         [DisplayName("Assigned To")]
         public string AssignedToName { get; set; }
         public IEnumerable<SelectListItem> TeamMemebrs { get; set; }
@@ -53,12 +53,12 @@ namespace Cognizant.Tools.ProjectMetrics.ProjectMetricsUILayer.Models
         [Display(Name = "Created Date")]
         public DateTime CreationDate { get; set; }
 
-        public int TaskTypeId { get; set; }
+        public string TaskTypeId { get; set; }
         [DisplayName("Task Type")]
         public string TaskTypeName { get; set; }
         public IEnumerable<SelectListItem> TaskType { get; set; }
 
-        public int TeamId { get; set; }
+        public string TeamId { get; set; }
         [DisplayName("Team")]
         public string TeamName { get; set; }
         public IEnumerable<SelectListItem> Teams { get; set; }
